@@ -290,7 +290,25 @@
                 font-size: 0.85em;
             }
         }
-    </style>
+    
+        /* 独立的日期内容区块 */
+        .competitor-date-content {
+            display: none;
+        }
+        
+        .competitor-date-content.active {
+            display: block;
+        }
+        
+        .user-feedback-date-content {
+            display: none;
+        }
+        
+        .user-feedback-date-content.active {
+            display: block;
+        }
+
+</style>
 </head>
 <body>
     <div class="container">
@@ -326,15 +344,15 @@
                 <h2 class="section-title">2、竞品动态追踪</h2>
                 
                 <!-- 日期切换按钮 -->
-                <div class="date-tabs">
-                    <button class="date-tab active" onclick="showDate('04-02')">4月2日</button>
-                    <button class="date-tab" onclick="showDate('04-01')">4月1日</button>
-                    <button class="date-tab" onclick="showDate('03-31')">3月31日</button>
-                    <button class="date-tab" onclick="showDate('03-30')">3月30日</button>
+                <div class="date-tabs" id="competitor-date-tabs">
+                    <button class="date-tab active" onclick="showCompetitorDate('04-02')">4月2日</button>
+                    <button class="date-tab" onclick="showCompetitorDate('04-01')">4月1日</button>
+                    <button class="date-tab" onclick="showCompetitorDate('03-31')">3月31日</button>
+                    <button class="date-tab" onclick="showCompetitorDate('03-30')">3月30日</button>
                 </div>
 
                                 <!-- 4月2日内容 -->
-                <div id="date-04-02" class="date-content active">
+                <div id="competitor-04-02" class="competitor-date-content active">
                     <div class="timeline">
                         <div class="timeline-item">
                             <div class="timeline-date">4月2日</div>
@@ -431,7 +449,7 @@
                 </div>
 
 <!-- 4月1日内容 -->
-                <div id="date-04-01" class="date-content active">
+                <div id="competitor-04-01" class="competitor-date-content">
                     <div class="timeline">
                         <div class="timeline-item">
                             <div class="timeline-date">4月1日</div>
@@ -529,7 +547,7 @@
                 </div>
 
                 <!-- 3月31日内容 -->
-                <div id="date-03-31" class="date-content">
+                <div id="competitor-03-31" class="competitor-date-content">
                     <div class="timeline">
                         <div class="timeline-item">
                             <div class="timeline-date">3月31日</div>
@@ -581,7 +599,7 @@
                 </div>
 
                 <!-- 3月30日内容 -->
-                <div id="date-03-30" class="date-content">
+                <div id="competitor-03-30" class="competitor-date-content">
                     <div class="timeline">
                         <div class="timeline-item">
                             <div class="timeline-date">3月30日</div>
@@ -644,70 +662,159 @@
                 </div>
             </div>
 
-            <!-- 用户需求追踪 -->
-            <div class="section">
+                        <!-- 用户需求追踪（带日期切换） -->
+            <div class="section" id="user-feedback-section">
                 <h2 class="section-title">3、用户需求追踪</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-date">3月31日</div>
-                        <div class="timeline-content">
-                            <div class="competitor-card" style="margin-bottom: 20px;">
-                                <span class="channel-tag">渠道：小红书</span>
-                                <ul>
-                                    <li>昵称抢注攻略和教程成为热门内容</li>
-                                    <li>用户积极分享自己成功抢到的 ID</li>
-                                    <li>极品 ID(单字、二字、诗意名)稀缺性引发热烈讨论</li>
-                                    <li>3 月 30 日 10 点抢注活动参与反馈集中爆发</li>
-                                    <li>PC 端公测定档 4 月 10 日的信息广泛传播</li>
-                                </ul>
+                
+                <!-- 日期切换按钮 -->
+                <div class="date-tabs" id="user-feedback-date-tabs">
+                    <button class="date-tab active" onclick="showUserFeedbackDate('04-02')">4月2日</button>
+                    <button class="date-tab" onclick="showUserFeedbackDate('04-01')">4月1日</button>
+                    <button class="date-tab" onclick="showUserFeedbackDate('03-31')">3月31日</button>
+                    <button class="date-tab" onclick="showUserFeedbackDate('03-30')">3月30日</button>
+                </div>
+
+                <!-- 4月2日内容 -->
+                <div id="user-feedback-04-02" class="user-feedback-date-content active">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">4月2日</div>
+                            <div class="timeline-content">
+                                <div class="competitor-card" style="margin-bottom: 20px;">
+                                    <span class="channel-tag">渠道：微博</span>
+                                    <h3 class="subsubsection-title">微博舆情分析（前5页共56条帖子）</h3>
+                                    
+                                    <h4 style="color: #5a67d8; margin: 15px 0 10px 0;">用户关注点分布</h4>
+                                    <ul>
+                                        <li>其他/未分类: 15.5%</li>
+                                        <li>性能优化: 8.6%</li>
+                                        <li>组队社交: 8.6%</li>
+                                        <li>游戏攻略: 6.9%</li>
+                                        <li>签到水帖: 6.9%</li>
+                                        <li>同人创作: 6.9%</li>
+                                        <li>外观时装: 6.9%</li>
+                                        <li>其他推广: 6.9%</li>
+                                    </ul>
+
+                                    <h4 style="color: #5a67d8; margin: 15px 0 10px 0;">核心发现</h4>
+                                    <ul>
+                                        <li><strong>服务类需求突出：</strong>代练代肝+道具交易合计占8.6%，反映玩家对省时省力解决方案的持续关注</li>
+                                        <li><strong>社交属性显著：</strong>组队社交相关内容占8.6%，体现游戏的强社交驱动特征</li>
+                                        <li><strong>内容消费活跃：</strong>攻略+资讯类内容占12.1%，说明玩家积极获取游戏相关信息</li>
+                                        <li><strong>技术体验关注：</strong>性能优化诉求占8.6%，反映玩家对游戏流畅度的重视</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">3月30日</div>
-                        <div class="timeline-content">
-                            <div class="competitor-card" style="margin-bottom: 20px;">
-                                <span class="channel-tag">渠道：小红书</span>
-                                <ul>
-                                    <li>ID 抢注成为热点话题</li>
-                                    <li>昵称唯一性机制引发用户间激烈竞争</li>
-                                    <li>用户普遍反馈注册困难，如"努力半天一个词组都没有"</li>
-                                    <li>单字 ID 极度稀缺</li>
-                                    <li>常见成功注册 ID 多为 2–4 字文学性、诗意类名称，例如："敬山水""月神""惊鸿舞"</li>
-                                </ul>
-                            </div>
+                </div>
 
-                            <div class="competitor-card">
-                                <span class="channel-tag">渠道：微博</span>
-                                <p>用户主要行为集中在：晒出已抢到的游戏 ID、讨论 ID 抢注难度、表达对稀有 ID 获取难的情绪反馈</p>
+                <!-- 4月1日内容 -->
+                <div id="user-feedback-04-01" class="user-feedback-date-content">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">4月1日</div>
+                            <div class="timeline-content">
+                                <p style="color: #718096; font-style: italic;">暂无新动态</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3月31日内容 -->
+                <div id="user-feedback-03-31" class="user-feedback-date-content">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">3月31日</div>
+                            <div class="timeline-content">
+                                <div class="competitor-card" style="margin-bottom: 20px;">
+                                    <span class="channel-tag">渠道：小红书</span>
+                                    <ul>
+                                        <li>昵称抢注攻略和教程成为热门内容</li>
+                                        <li>用户积极分享自己成功抢到的 ID</li>
+                                        <li>极品 ID(单字、二字、诗意名)稀缺性引发热烈讨论</li>
+                                        <li>3 月 30 日 10 点抢注活动参与反馈集中爆发</li>
+                                        <li>PC 端公测定档 4 月 10 日的信息广泛传播</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3月30日内容 -->
+                <div id="user-feedback-03-30" class="user-feedback-date-content">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">3月30日</div>
+                            <div class="timeline-content">
+                                <div class="competitor-card" style="margin-bottom: 20px;">
+                                    <span class="channel-tag">渠道：小红书</span>
+                                    <ul>
+                                        <li>ID 抢注成为热点话题</li>
+                                        <li>昵称唯一性机制引发用户间激烈竞争</li>
+                                        <li>用户普遍反馈注册困难，如"努力半天一个词组都没有"</li>
+                                        <li>单字 ID 极度稀缺</li>
+                                        <li>常见成功注册 ID 多为 2–4 字文学性、诗意类名称，例如："敬山水""月神""惊鸿舞"</li>
+                                    </ul>
+                                </div>
+
+                                <div class="competitor-card">
+                                    <span class="channel-tag">渠道：微博</span>
+                                    <p>用户主要行为集中在：晒出已抢到的游戏 ID、讨论 ID 抢注难度、表达对稀有 ID 获取难的情绪反馈</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
         <div class="footer">
             <p>© 2026 市场监控报告 | 数据更新时间：4月1日</p>
         </div>
     </div>
 
-    <script>
-        function showDate(dateId) {
-            // 隐藏所有内容
-            const contents = document.querySelectorAll('.date-content');
+        <script>
+        // 竞品动态追踪日期切换
+        function showCompetitorDate(dateId) {
+            // 隐藏所有竞品内容
+            const contents = document.querySelectorAll('.competitor-date-content');
             contents.forEach(content => {
                 content.classList.remove('active');
             });
 
-            // 移除所有按钮的激活状态
-            const tabs = document.querySelectorAll('.date-tab');
+            // 移除所有竞品按钮的激活状态
+            const tabs = document.querySelectorAll('#competitor-date-tabs .date-tab');
             tabs.forEach(tab => {
                 tab.classList.remove('active');
             });
 
             // 显示选中的内容
-            const selectedContent = document.getElementById('date-' + dateId);
+            const selectedContent = document.getElementById('competitor-' + dateId);
+            if (selectedContent) {
+                selectedContent.classList.add('active');
+            }
+
+            // 激活对应的按钮
+            event.target.classList.add('active');
+        }
+
+        // 用户需求追踪日期切换
+        function showUserFeedbackDate(dateId) {
+            // 隐藏所有用户反馈内容
+            const contents = document.querySelectorAll('.user-feedback-date-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // 移除所有用户反馈按钮的激活状态
+            const tabs = document.querySelectorAll('#user-feedback-date-tabs .date-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // 显示选中的内容
+            const selectedContent = document.getElementById('user-feedback-' + dateId);
             if (selectedContent) {
                 selectedContent.classList.add('active');
             }
