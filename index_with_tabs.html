@@ -609,6 +609,45 @@
             event.target.classList.add('active');
         }
 
+        // 页面加载时初始化：只显示最新日期的内容
+        function initDateTabs() {
+            // 竞品动态追踪：只保留 04-09 的 active 状态
+            document.querySelectorAll('.competitor-date-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            const latestCompetitor = document.getElementById('competitor-04-09');
+            if (latestCompetitor) {
+                latestCompetitor.classList.add('active');
+            }
+            
+            // 重置竞品日期按钮状态
+            document.querySelectorAll('#competitor-date-tabs .date-tab').forEach(el => {
+                el.classList.remove('active');
+            });
+            const latestCompetitorBtn = document.querySelector('#competitor-date-tabs .date-tab:first-child');
+            if (latestCompetitorBtn) {
+                latestCompetitorBtn.classList.add('active');
+            }
+            
+            // 用户需求追踪：只保留 04-09 的 active 状态
+            document.querySelectorAll('.user-feedback-date-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            const latestFeedback = document.getElementById('feedback-04-09');
+            if (latestFeedback) {
+                latestFeedback.classList.add('active');
+            }
+            
+            // 重置用户反馈日期按钮状态
+            document.querySelectorAll('#feedback-date-tabs .date-tab').forEach(el => {
+                el.classList.remove('active');
+            });
+            const latestFeedbackBtn = document.querySelector('#feedback-date-tabs .date-tab:first-child');
+            if (latestFeedbackBtn) {
+                latestFeedbackBtn.classList.add('active');
+            }
+        }
+
         // 简单的 SVG 图表渲染
         function renderChart() {
             const container = document.getElementById('rank-chart-container');
@@ -640,7 +679,10 @@
             container.innerHTML = svg;
         }
 
-        window.onload = renderChart;
+        window.onload = function() {
+            initDateTabs();
+            renderChart();
+        };
         window.onresize = renderChart;
     </script>
 </body>
