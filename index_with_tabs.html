@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>王者荣耀世界 - 市场监控日报（带日期切换）</title>
     <style>
+        :root {
+            --color-primary: #ccff00; /* 荧光黄绿 */
+            --color-bg: #0d0d0d;      /* 深黑 */
+            --color-surface: rgba(20, 20, 20, 0.8); /* 磨砂表面 */
+            --color-border: rgba(255, 255, 255, 0.08);  /* 边框色 */
+            --color-text: #ffffff;    /* 纯白文本 */
+            --color-text-muted: #a0a0a0; /* 次要文本 */
+            --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; 
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,363 +23,285 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: var(--font-body);
+            background-color: var(--color-bg);
+            color: var(--color-text);
             min-height: 100vh;
-            padding: 20px;
             line-height: 1.6;
+            /* 深紫黑氛围感渐变背景 */
+            background-image: 
+                radial-gradient(circle at 20% 0%, rgba(100, 50, 150, 0.15), transparent 50%),
+                radial-gradient(circle at 80% 100%, rgba(100, 50, 150, 0.1), transparent 50%);
+            background-attachment: fixed;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
             max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin: 60px auto;
+            background: var(--color-surface);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 32px;
+            border: 1px solid var(--color-border);
             overflow: hidden;
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.6);
         }
 
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px 30px;
+            padding: 100px 60px 80px;
             text-align: center;
+            position: relative;
         }
 
         .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .date {
-            font-size: 1.2em;
-            opacity: 0.9;
+            font-family: var(--font-display);
+            font-size: 4em;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: var(--color-text);
+            letter-spacing: -0.03em;
+            text-transform: uppercase;
         }
 
         .content {
-            padding: 40px 30px;
+            padding: 60px 80px 100px;
         }
 
         .section {
-            margin-bottom: 40px;
+            margin-bottom: 100px;
         }
 
         .section-title {
-            font-size: 1.8em;
-            color: #2d3748;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #667eea;
-            font-weight: 600;
+            font-size: 2.2em;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: 40px;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            text-transform: uppercase;
         }
 
-        .subsubsection-title {
-            font-size: 1.3em;
-            color: #4a5568;
-            margin: 20px 0 15px 0;
-            font-weight: 600;
+        /* 像素风格图标容器 */
+        .pixel-icon {
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+            filter: drop-shadow(0 0 12px rgba(204, 255, 0, 0.5));
+        }
+
+        .pixel-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--color-primary);
         }
 
         .summary-box {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            padding: 25px;
-            border-radius: 8px;
-            border-left: 5px solid #667eea;
-        }
-
-        .summary-box p {
-            color: #2d3748;
-            font-size: 1.05em;
-            line-height: 1.8;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid var(--color-border);
         }
 
         .competitor-card {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 20px;
-            border: 1px solid #e2e8f0;
-            transition: transform 0.2s, box-shadow 0.2s;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--color-border);
+            padding: 35px;
+            margin-bottom: 25px;
+            border-radius: 24px;
+            transition: all 0.3s ease;
         }
 
         .competitor-card:hover {
+            border-color: rgba(204, 255, 0, 0.3);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background: rgba(0, 0, 0, 0.6);
         }
 
         .competitor-name {
-            font-size: 1.4em;
-            color: #667eea;
+            font-size: 1.2em;
+            color: var(--color-primary);
+            margin-bottom: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .subsubsection-title {
+            font-size: 1.2em;
+            color: var(--color-text);
+            margin: 30px 0 18px 0;
             font-weight: 600;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e2e8f0;
-        }
-
-        .channel-tag {
-            display: inline-block;
-            background: #667eea;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            margin-bottom: 15px;
-            font-weight: 500;
-        }
-
-        .competitor-card ul {
-            margin-left: 0;
         }
 
         ul {
-            margin-left: 20px;
-            margin-top: 10px;
+            margin-left: 25px;
+            margin-top: 12px;
         }
 
         li {
-            margin-bottom: 8px;
-            color: #4a5568;
-        }
-
-        li ul {
-            margin-top: 5px;
-            margin-left: 20px;
+            margin-bottom: 12px;
+            color: var(--color-text-muted);
         }
 
         p {
-            color: #4a5568;
-            margin-bottom: 10px;
+            color: var(--color-text-muted);
+            margin-bottom: 15px;
         }
 
-        .event-item {
-            background: #f0f9ff;
-            padding: 15px 20px;
-            border-radius: 6px;
-            margin-bottom: 10px;
-            border-left: 4px solid #667eea;
-        }
-
-        .event-time {
-            font-weight: 600;
-            color: #667eea;
-            margin-right: 10px;
-        }
-
-        /* 时间线样式 */
+        /* 时间线样式优化 */
         .timeline {
             position: relative;
-            padding-left: 30px;
+            padding-left: 40px;
         }
 
         .timeline::before {
             content: '';
             position: absolute;
-            left: 8px;
-            top: 0;
-            bottom: 0;
+            left: 6px;
+            top: 10px;
+            bottom: 10px;
             width: 2px;
-            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            background: var(--color-border);
+            border-radius: 1px;
         }
 
         .timeline-item {
             position: relative;
-            margin-bottom: 25px;
-            display: flex;
-            flex-direction: column;
+            margin-bottom: 40px;
         }
 
         .timeline-item::before {
             content: '';
             position: absolute;
-            left: 24px;
+            left: -38px;
             top: 8px;
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
+            background: var(--color-bg);
+            border: 2px solid var(--color-primary);
             border-radius: 50%;
-            background: white;
-            border: 3px solid #667eea;
             z-index: 1;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
         }
 
         .timeline-date {
-            font-size: 1.1em;
-            font-weight: 600;
-            color: #667eea;
-            margin-bottom: 10px;
-            padding: 8px 15px;
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            border-radius: 6px;
-            display: block;
-            width: fit-content;
-            margin-left: 24px;
+            font-size: 0.95em;
+            color: var(--color-primary);
+            margin-bottom: 12px;
+            display: inline-block;
+            font-weight: 500;
         }
 
         .timeline-content {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            border: 1px solid #e2e8f0;
-            margin-top: 10px;
-            margin-left: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--color-border);
+            padding: 25px;
+            border-radius: 16px;
         }
 
-        .footer {
-            background: #f8f9fa;
-            padding: 20px;
-            text-align: center;
-            color: #718096;
-            border-top: 1px solid #e2e8f0;
-        }
-
-        /* 日期切换按钮样式 */
+        /* 日期切换按钮 - Digital Alchemy 风格 */
         .date-tabs {
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            margin-left: 24px;
+            gap: 15px;
+            margin-bottom: 50px;
             flex-wrap: wrap;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 8px;
+            border-radius: 20px;
+            border: 1px solid var(--color-border);
+            width: fit-content;
         }
 
         .date-tab {
-            padding: 10px 20px;
-            border: 2px solid #667eea;
-            background: white;
-            color: #667eea;
-            border-radius: 8px;
+            padding: 12px 24px;
+            border: none;
+            background: transparent;
+            color: var(--color-text-muted);
             cursor: pointer;
             font-size: 0.95em;
-            font-weight: 500;
+            font-weight: 600;
+            border-radius: 14px;
             transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .date-tab:hover {
-            background: #f0f9ff;
-            transform: translateY(-2px);
+            color: var(--color-text);
         }
 
         .date-tab.active {
-            background: #667eea;
-            color: white;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            background: var(--color-primary);
+            color: #000;
+            box-shadow: 0 6px 20px rgba(204, 255, 0, 0.3);
         }
 
-        .date-content {
+        .competitor-date-content, .user-feedback-date-content {
             display: none;
         }
 
-        .date-content.active {
+        .competitor-date-content.active, .user-feedback-date-content.active {
             display: block;
-            animation: fadeIn 0.3s ease-in;
+            animation: fadeIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.8em;
-            }
-
-            .content {
-                padding: 25px 20px;
-            }
-
-            .section-title {
-                font-size: 1.5em;
-            }
-
-            .competitor-card {
-                padding: 20px;
-            }
-
-            .date-tabs {
-                gap: 8px;
-            }
-
-            .date-tab {
-                padding: 8px 15px;
-                font-size: 0.85em;
-            }
-        }
-    
-        /* 独立的日期内容区块 */
-        .competitor-date-content {
-            display: none;
-        }
-        
-        .competitor-date-content.active {
-            display: block;
-        }
-        
-        .user-feedback-date-content {
-            display: none;
-        }
-        
-        .user-feedback-date-content.active {
-            display: block;
-        }
-
-        /* 榜单曲线图样式 */
+        /* 榜单曲线图容器 */
         #rank-chart-container {
             width: 100%;
-            height: 350px;
+            height: 400px;
             position: relative;
             margin-top: 20px;
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--color-border);
         }
-        
-        #rank-chart-container svg {
-            width: 100%;
-            height: 100%;
-        }
-        
-        .chart-tooltip {
-            position: absolute;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 4px;
-            font-size: 12px;
-            pointer-events: none;
-            display: none;
-            z-index: 1000;
-        }
-        
+
         .chart-legend {
             display: flex;
             justify-content: center;
             gap: 30px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
-        
+
         .chart-legend-item {
             display: flex;
             align-items: center;
             gap: 8px;
             font-size: 14px;
+            color: var(--color-text-muted);
         }
-        
+
         .chart-legend-color {
             width: 20px;
             height: 3px;
-        }
-        
-        .chart-data-source {
-            text-align: center;
-            color: #999;
-            font-size: 12px;
-            margin-top: 15px;
+            background-color: var(--color-primary);
+            border-radius: 2px;
         }
 
-</style>
+        .chart-data-source {
+            text-align: center;
+            color: var(--color-text-muted);
+            font-size: 12px;
+            margin-top: 20px;
+            opacity: 0.6;
+        }
+
+        @media (max-width: 768px) {
+            .container { margin: 0; border-radius: 0; border: none; }
+            .header h1 { font-size: 2em; }
+            .content { padding: 30px 20px; }
+            .section-title { font-size: 1.5em; }
+            .competitor-card { padding: 20px; }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
