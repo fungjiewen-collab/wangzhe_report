@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>王者荣耀世界 - 市场监控日报（带日期切换）</title>
+    <title>《王者荣耀：世界》AI 辅助市场监控日报（带日期切换）</title>
     <style>
         * {
             margin: 0;
@@ -36,14 +36,17 @@
         }
 
         .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .date {
-            font-size: 1.2em;
-            opacity: 0.9;
+            font-family: var(--font-display);
+            font-size: 4em;
+            font-weight: 800;
+            margin-bottom: 15px;
+            /* 绿白色渐变 */
+            background: linear-gradient(135deg, #ffffff 0%, #00ff41 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.03em;
+            text-transform: uppercase;
         }
 
         .content {
@@ -55,11 +58,67 @@
         }
 
         .section-title {
-            font-size: 1.8em;
-            color: #2d3748;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #667eea;
+            font-size: 2.2em;
+            font-weight: 700;
+            /* 荧光绿色 */
+            color: #00ff41;
+            margin-bottom: 40px;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            text-transform: uppercase;
+        }
+
+        /* 像素风格图标容器 */
+        .pixel-icon {
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+            filter: drop-shadow(0 0 12px rgba(204, 255, 0, 0.5));
+        }
+
+        .pixel-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--color-primary);
+        }
+
+        .summary-box {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid var(--color-border);
+        }
+
+        .competitor-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--color-border);
+            padding: 35px;
+            margin-bottom: 25px;
+            border-radius: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .competitor-card:hover {
+            border-color: rgba(204, 255, 0, 0.3);
+            transform: translateY(-2px);
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .competitor-name {
+            font-size: 1.2em;
+            color: var(--color-primary);
+            margin-bottom: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .subsubsection-title {
+            font-size: 1.2em;
+            color: var(--color-text);
+            margin: 30px 0 18px 0;
             font-weight: 600;
         }
 
@@ -192,16 +251,12 @@
         }
 
         .timeline-date {
-            font-size: 1.1em;
-            font-weight: 600;
-            color: #667eea;
-            margin-bottom: 10px;
-            padding: 8px 15px;
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            border-radius: 6px;
-            display: block;
-            width: fit-content;
-            margin-left: 24px;
+            font-size: 0.95em;
+            /* 荧光绿色 */
+            color: #00ff41;
+            margin-bottom: 12px;
+            display: inline-block;
+            font-weight: 500;
         }
 
         .timeline-content {
@@ -373,15 +428,15 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>王者荣耀世界 - 市场监控日报</h1>
+            <h1>《王者荣耀：世界》AI 辅助市场监控日报</h1>
         </div>
 
         <div class="content">
             <!-- 总结部分 -->
             <div class="section">
                 <h2 class="section-title">总结</h2>
-                <div class="summary-box">
-                    <p>官方活动：《王者荣耀世界》联动版本及PC端公测将于4月10日开启。<br>竞品动态：<br>螃蟹：账号交易中0-500元区间占比最高（40%），单字及双字ID受追捧，合计占比67%。<br>盼之：提供成品号、昵称及代肝服务，价格以500-1000元为主，中位数价格788元。<br>闲鱼：账号与ID交易占比73.3%，个人卖家活跃，低价虚拟物品交易频繁。<br>用户需求：微博舆情显示组队社交与道具交易各占15.5%，代练代肝占10.3%，玩家对开服组队及资源获取需求旺盛。</p>
+                <div class="section-content">
+                    4 月 9 日总结<br>官方活动：王者荣耀 x 王者荣耀世界 联动版本 4 月 10 日即将上线；农友同行，奔赴世界丨王者荣耀世界 PC 端公测 4 月 10 日开启<br>竞品动态：<br>- 螃蟹：账号交易为主，价格区间集中在 0-500 元（占 40%），单字 ID 占比 38%，QQ 平台占主导（85%）<br>- 盼之：商品类型多样化（成品号、昵称、代肝、充值），价格以 500-1000 元为主（占 43%），双字 ID 占比 35%，安卓 QQ 平台占 76%<br>- 闲鱼：账号/ID 交易占绝对主导（73.3%），充值/代充服务活跃（13.3%），个人卖家居多，交易活跃<br>用户需求：微博舆情分析显示，核心关注点为组队社交 (15.5%)、道具交易 (15.5%)；服务类需求合计 25.9%（代练代肝 10.3% + 道具交易 15.5%），反映玩家对省时省力和资源获取的明显需求
                 </div>
                 
                 <!-- 榜单曲线图 -->
