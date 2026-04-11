@@ -1608,7 +1608,6 @@
                     
                     
                     <button class="date-tab active" onclick="showUserFeedbackDate('04-11')">04月11日</button>
-                    <button class="date-tab " onclick="showUserFeedbackDate('04-11')">04月11日</button><button class="date-tab " onclick="showUserFeedbackDate('04-11')">04月11日</button>
                     <button class="date-tab " onclick="showUserFeedbackDate('04-10')">04月10日</button><button class="date-tab " onclick="showUserFeedbackDate('04-10')">04月10日</button>
                     <button class="date-tab " onclick="showUserFeedbackDate('04-09')">04月09日</button><button class="date-tab " onclick="showUserFeedbackDate('04-09')">4月9日</button>
                     <button class="date-tab " onclick="showUserFeedbackDate('04-08')">4月8日</button>
@@ -1622,6 +1621,23 @@
                     <button class="date-tab " onclick="showUserFeedbackDate('03-30')">3月30日</button>
                 </div>
 
+
+                <!-- 4月11日内容 -->
+                <div id="user-feedback-04-11" class="user-feedback-date-content active">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">4月11日</div>
+                            <div class="timeline-content">
+                                <div class="competitor-card" style="margin-bottom: 20px;">
+                                    <span class="channel-tag">渠道：微博</span>
+                                    <h3 class="subsubsection-title">微博舆情分析</h3>
+                                    <p style="color: #f59e0b; font-size: 0.9em;">数据收集中，请稍后查看...</p>
+                                    <p>预计今日晚些时候更新完整的微博舆情分析报告。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- 4月9日内容 -->
                 <div id="user-feedback-04-09" class="user-feedback-date-content">
@@ -2119,11 +2135,11 @@
                 latestCompetitorBtn.classList.add('active');
             }
             
-            // 用户需求追踪：只保留 04-09 的 active 状态
+            // 用户需求追踪：只保留 04-11 的 active 状态
             document.querySelectorAll('.user-feedback-date-content').forEach(el => {
                 el.classList.remove('active');
             });
-            const latestFeedback = document.getElementById('user-feedback-04-09');
+            const latestFeedback = document.getElementById('user-feedback-04-11');
             if (latestFeedback) {
                 latestFeedback.classList.add('active');
             }
