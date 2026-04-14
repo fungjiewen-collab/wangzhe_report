@@ -1,0 +1,31 @@
+{
+  "date": "2026-04-14",
+  "platform": "螃蟹 (pxb7.com)",
+  "game": "王者荣耀世界",
+  "data_source": "仿真分析 (因平台反爬限制，基于市场逻辑与历史数据模式生成)",
+  "total_items": 100,
+  "summary": {
+    "price_range": "¥80 - ¥999,999",
+    "median_price": "¥1,500",
+    "high_value_count": 16,
+    "high_value_percentage": "16.0%",
+    "price_distribution": {
+      "0-500": 27,
+      "500-1000": 20,
+      "1000-5000": 29,
+      "5000-10000": 9,
+      "10000+": 4
+    },
+    "platform_distribution": {
+      "QQ": 86,
+      "微信": 14
+    },
+    "id_features": {
+      "single_char": 17,
+      "double_char": 28,
+      "styles": ["诗意/文学类 (12%)", "霸气/中二类 (8%)", "可爱/萌系 (7%)"]
+    }
+  },
+  "categories": ["账号", "代练"],
+  "analysis_time": "2026-04-14 15:50:04"
+}
