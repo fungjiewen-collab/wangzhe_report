@@ -370,22 +370,24 @@
 <div class="section">
 <h2 class="section-title">2、竞品动态追踪</h2>
 <!-- 日期切换按钮 -->
-<div class="date-tabs" id="competitor-date-tabs"><button class="date-tab" onclick="showCompetitorDate('03-30')">3月30日</button>
-<button class="date-tab" onclick="showCompetitorDate('03-31')">3月31日</button>
-<button class="date-tab" onclick="showCompetitorDate('04-01')">4月1日</button>
-<button class="date-tab" onclick="showCompetitorDate('04-02')">4月2日</button>
-<button class="date-tab" onclick="showCompetitorDate('04-03')">4月3日</button>
-<button class="date-tab" onclick="showCompetitorDate('04-04')">4月4日</button>
-<button class="date-tab" onclick="showCompetitorDate('04-05')">4月5日</button>
-<button class="date-tab" onclick="showCompetitorDate('04-06')">4月6日</button>
-<button class="date-tab" onclick="showCompetitorDate('04-07')">4月7日</button>
-<button class="date-tab" onclick="showCompetitorDate('04-08')">4 月 8 日</button>
-<button class="date-tab" onclick="showCompetitorDate('04-09')">4月9日</button>
-<button class="date-tab" onclick="showCompetitorDate('04-10')">4月10日</button>
-<button class="date-tab" onclick="showCompetitorDate('04-11')">4月11日</button>
-<button class="date-tab" onclick="showCompetitorDate('04-12')">4月12日</button>
-<button class="date-tab" onclick="showCompetitorDate('04-13')">4月13日</button>
+<div class="date-tabs" id="competitor-date-tabs">
+<button class="date-tab active" onclick="showCompetitorDate('04-15')">4月15日</button>
 <button class="date-tab" onclick="showCompetitorDate('04-14')">4月14日</button>
+<button class="date-tab" onclick="showCompetitorDate('04-13')">4月13日</button>
+<button class="date-tab" onclick="showCompetitorDate('04-12')">4月12日</button>
+<button class="date-tab" onclick="showCompetitorDate('04-11')">4月11日</button>
+<button class="date-tab" onclick="showCompetitorDate('04-10')">4月10日</button>
+<button class="date-tab" onclick="showCompetitorDate('04-09')">4月9日</button>
+<button class="date-tab" onclick="showCompetitorDate('04-08')">4月8日</button>
+<button class="date-tab" onclick="showCompetitorDate('04-07')">4月7日</button>
+<button class="date-tab" onclick="showCompetitorDate('04-06')">4月6日</button>
+<button class="date-tab" onclick="showCompetitorDate('04-05')">4月5日</button>
+<button class="date-tab" onclick="showCompetitorDate('04-04')">4月4日</button>
+<button class="date-tab" onclick="showCompetitorDate('04-03')">4月3日</button>
+<button class="date-tab" onclick="showCompetitorDate('04-02')">4月2日</button>
+<button class="date-tab" onclick="showCompetitorDate('04-01')">4月1日</button>
+<button class="date-tab" onclick="showCompetitorDate('03-31')">3月31日</button>
+<button class="date-tab" onclick="showCompetitorDate('03-30')">3月30日</button>
 </div>
 <!-- 4月12日内容 -->
 <div class="competitor-date-content" id="competitor-04-12">
@@ -552,6 +554,7 @@
 <p><strong>主要风格:</strong> 诗意/文学类 (35%)、霸气/中二类 (25%)、可爱/萌系 (20%)、明星/名人 (10%)、其他 (10%)</p>
 <p><strong>核心发现：</strong> 闲鱼平台《王者荣耀世界》商品类型多样，包括账号、ID、捏脸数据、代练服务等。价格主要集中在0-500元区间（占53.8%），中位数价格约¥269。平台分布以未明确为主（90.6%），QQ区仅占8.5%。ID命名以三字及以上为主（85.5%），单字和双字ID较为稀有。</p>
 </div>
+<!-- 4月15日内容（最新） -->
 <div class="competitor-date-content active" id="competitor-04-15">
 <div class="competitor-card">
 <div class="competitor-name">竞品一：螃蟹</div>
@@ -2533,22 +2536,21 @@
         }
 
         // 页面加载时初始化：只显示最新日期的内容
-        // 页面加载时初始化：只显示最新日期的内容
         function initDateTabs() {
-            // 竞品动态追踪
+            // 竞品动态追踪：按钮已按倒序排列，第一个按钮即为最新日期
             const compContents = document.querySelectorAll('.competitor-date-content');
             compContents.forEach(el => el.classList.remove('active'));
             
             const compTabs = document.querySelectorAll('#competitor-date-tabs .date-tab');
             compTabs.forEach(el => el.classList.remove('active'));
             
-            // 最新日期是最后一个按钮（因为我们是按从早到晚排序的）
+            // 激活第一个按钮（最新日期）
             if (compTabs.length > 0) {
-                const lastTab = compTabs[compTabs.length - 1];
-                lastTab.classList.add('active');
+                const firstTab = compTabs[0];
+                firstTab.classList.add('active');
                 
                 // Extract date ID from onclick
-                const onclickStr = lastTab.getAttribute('onclick');
+                const onclickStr = firstTab.getAttribute('onclick');
                 const match = onclickStr.match(/'([^']+)'/);
                 if (match) {
                     const dateId = match[1];
@@ -2557,7 +2559,7 @@
                 }
             }
             
-            // 用户需求追踪 (Similar logic if needed, but keeping existing for now or applying same pattern)
+            // 用户需求追踪：同样逻辑，激活第一个按钮（最新日期）
             const fbContents = document.querySelectorAll('.user-feedback-date-content');
             fbContents.forEach(el => el.classList.remove('active'));
             
@@ -2565,48 +2567,16 @@
             fbTabs.forEach(el => el.classList.remove('active'));
             
             if (fbTabs.length > 0) {
-                const lastTab = fbTabs[fbTabs.length - 1];
-                lastTab.classList.add('active');
+                const firstTab = fbTabs[0];
+                firstTab.classList.add('active');
                 
-                const onclickStr = lastTab.getAttribute('onclick');
+                const onclickStr = firstTab.getAttribute('onclick');
                 const match = onclickStr.match(/'([^']+)'/);
                 if (match) {
                     const dateId = match[1];
                     const content = document.getElementById('user-feedback-' + dateId);
                     if (content) content.classList.add('active');
                 }
-            }
-        });
-            const latestCompetitor = document.getElementById('competitor-04-14');
-            if (latestCompetitor) {
-                latestCompetitor.classList.add('active');
-            }
-            
-            // 重置竞品日期按钮状态
-            document.querySelectorAll('#competitor-date-tabs .date-tab').forEach(el => {
-                el.classList.remove('active');
-            });
-            const latestCompetitorBtn = document.querySelector('#competitor-date-tabs .date-tab:first-child');
-            if (latestCompetitorBtn) {
-                latestCompetitorBtn.classList.add('active');
-            }
-            
-            // 用户需求追踪：只显示最新日期(04-14)的内容
-            document.querySelectorAll('.user-feedback-date-content').forEach(el => {
-                el.classList.remove('active');
-            });
-            const latestFeedback = document.getElementById('user-feedback-04-14');
-            if (latestFeedback) {
-                latestFeedback.classList.add('active');
-            }
-            
-            // 重置用户反馈日期按钮状态
-            document.querySelectorAll('#user-feedback-date-tabs .date-tab').forEach(el => {
-                el.classList.remove('active');
-            });
-            const latestFeedbackBtn = document.querySelector('#user-feedback-date-tabs .date-tab:first-child');
-            if (latestFeedbackBtn) {
-                latestFeedbackBtn.classList.add('active');
             }
         }
 
