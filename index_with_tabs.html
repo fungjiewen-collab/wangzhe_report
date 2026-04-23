@@ -1198,8 +1198,10 @@
 <script>
         // 竞品动态追踪日期切换
         function showCompetitorDate(dateId, btn) {
+            console.log("showCompetitorDate called with dateId:", dateId);
             // 隐藏所有竞品内容
             const contents = document.querySelectorAll('.competitor-date-content');
+            console.log("Found contents:", contents.length);
             contents.forEach(content => {
                 content.classList.remove('active');
             });
@@ -1212,8 +1214,12 @@
 
             // 显示选中的内容
             const selectedContent = document.getElementById('competitor-' + dateId);
+            console.log("Selected content element:", selectedContent);
             if (selectedContent) {
                 selectedContent.classList.add('active');
+                console.log("Added active class to:", selectedContent.id);
+            } else {
+                console.error("Content not found for ID: competitor-" + dateId);
             }
 
             // 激活对应的按钮
